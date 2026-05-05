@@ -1,0 +1,19 @@
+/vendor
+/node_modules
+/public/storage
+/public/hot
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+.phpunit.result.cache
+.env
+.env.backup
+.env.production
+chatter.log
+
+# Docker & OS
+.docker/dbdata/*
+.DS_Store
+Thumbs.db
