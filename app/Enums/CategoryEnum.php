@@ -4,11 +4,11 @@ namespace App\Enums;
 
 enum CategoryEnum: string
 {
-    case ELECTRONICS = 'electronics';
-    case CLOTHING = 'clothing';
-    case HOME = 'home';
-    case FOOD = 'food';
-    case BOOKS = 'books';
+    case ELETRONICOS = 'eletronicos';
+    case VESTUARIO = 'vestuario';
+    case ALIMENTOS = 'alimentos';
+    case MOVEIS = 'moveis';
+    case LIVROS = 'livros';
 
     public static function values(): array
     {
