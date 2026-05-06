@@ -10,6 +10,9 @@ services:
       - ./:/var/www
     networks:
       - app-network
+    depends_on:
+      - db
+      - redis # Adicionado aqui
 
   web:
     image: nginx:alpine
@@ -37,6 +40,15 @@ services:
       - "5432:5432"
     volumes:
       - dbdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    container_name: laravel_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
     networks:
       - app-network
 
