@@ -31,7 +31,7 @@ O projeto segue uma arquitetura em camadas para garantir testabilidade e facilid
 ### Passo a Passo
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/Aceltino/product_api.git](https://github.com/Aceltino/product_api.git)
+    git clone https://github.com/Aceltino/product_api.git
     cd product_api
     ```
 
