@@ -15,8 +15,12 @@ class ProductCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection,
-            // O Laravel automaticamente injeta 'links' e 'meta' (current_page, per_page, total) 
-            // quando paginamos com LengthAwarePaginator na raiz da resposta.
+            'meta' => [
+                'total'        => $this->total(),
+                'per_page'     => $this->perPage(),
+                'current_page' => $this->currentPage(),
+                'last_page'    => $this->lastPage(),
+            ],
         ];
     }
 }

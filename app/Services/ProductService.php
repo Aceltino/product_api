@@ -36,8 +36,8 @@ class ProductService
     public function createProduct(ProductData $data): Product
     {
         try {
-            $this->invalidateCache();
             $product = $this->repository->create($data);
+            $this->invalidateCache();
 
             Log::info('Product created successfully', [
                 'id' => $product->id,
@@ -55,19 +55,10 @@ class ProductService
         }
     }
 
-    public function updateProduct(int $id, ProductData $data): bool
+    public function updateProduct(int $id, ProductData $data): Product
     {
         try {
             $product = $this->repository->findById($id);
-
-            // prevenir estoque negativo no update
-            if ($data->stock < 0) {
-                Log::warning('Attempted to update product with negative stock', [
-                    'product_id' => $id,
-                    'attempted_stock' => $data->stock
-                ]);
-                throw new \InvalidArgumentException("O estoque não pode ser negativo.");
-            }
 
             $this->invalidateCache();
             $updated = $this->repository->update($product, $data);
@@ -79,7 +70,7 @@ class ProductService
                 ]);
             }
 
-            return $updated;
+            return $product->fresh();
         } catch (\Exception $e) {
             Log::error('Failed to update product', [
                 'id' => $id,
@@ -93,7 +84,7 @@ class ProductService
     {
         try {
             $product = $this->repository->findById($id);
-            
+
             $this->invalidateCache();
             $deleted = $this->repository->delete($product);
 

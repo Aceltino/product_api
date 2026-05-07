@@ -29,8 +29,8 @@ class Product extends Model
         'category' => CategoryEnum::class, // Conversão automática para Enum
     ];
 
-    public function scopeActive(Builder $query): void
+    public function scopeActive(Builder $query): Builder
     {
-        $query->where('is_active', true);
+        return $query->where('is_active', true);
     }
 }

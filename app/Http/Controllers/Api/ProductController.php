@@ -9,6 +9,7 @@ use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use App\DTOs\ProductData;
 use App\DTOs\ProductFilterData;
+use App\Http\Resources\ProductCollection;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -46,17 +47,11 @@ class ProductController extends Controller
     {
         $filters = ProductFilterData::fromRequest($request->all());
         $paginator = $this->service->listProducts($filters);
-        
-        $data = ProductResource::collection($paginator)->resolve();
-        
-        $meta = [
-            'total' => $paginator->total(),
-            'per_page' => $paginator->perPage(),
-            'current_page' => $paginator->currentPage(),
-            'last_page' => $paginator->lastPage()
-        ];
 
-        return $this->success($data, 'Produtos listados com sucesso.', 200, $meta);
+        return $this->success(
+            new ProductCollection($paginator),
+            'Produtos listados com sucesso.'
+        );
     }
 
     /**
@@ -81,7 +76,7 @@ class ProductController extends Controller
     {
         $dto = ProductData::fromRequest($request->validated());
         $product = $this->service->createProduct($dto);
-        
+
         return $this->success(new ProductResource($product), 'Produto criado com sucesso.', 201);
     }
 
@@ -102,7 +97,7 @@ class ProductController extends Controller
     public function show(int $id): JsonResponse
     {
         $product = $this->service->getProduct($id);
-        
+
         return $this->success(new ProductResource($product), 'Produto encontrado.');
     }
 
@@ -122,7 +117,7 @@ class ProductController extends Controller
     {
         $dto = ProductData::fromRequest($request->validated());
         $this->service->updateProduct($id, $dto);
-        
+
         return $this->success(null, 'Produto atualizado com sucesso.');
     }
 
@@ -139,7 +134,7 @@ class ProductController extends Controller
     public function destroy(int $id): JsonResponse
     {
         $this->service->deleteProduct($id);
-        
-        return response()->json(null, 204);
+
+        return $this->success(null, 'Produto removido com sucesso.', 204);
     }
 }

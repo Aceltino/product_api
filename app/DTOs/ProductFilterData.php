@@ -17,7 +17,7 @@ readonly class ProductFilterData
             search: $data['search'] ?? null,
             category: $data['category'] ?? null,
             is_active: isset($data['is_active']) ? filter_var($data['is_active'], FILTER_VALIDATE_BOOLEAN) : null,
-            per_page: (int) ($data['per_page'] ?? 10)
+            per_page: min((int) ($data['per_page'] ?? 15), 100)
         );
     }
 }
