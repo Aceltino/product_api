@@ -13,9 +13,18 @@ class ProductRepository implements ProductRepositoryInterface
     public function list(ProductFilterData $filters): LengthAwarePaginator
     {
         return Product::query()
-            ->when($filters->search, fn($q) => $q->where('name', 'ilike', "%{$filters->search}%"))
-            ->when($filters->category, fn($q) => $q->where('category', $filters->category))
-            ->when(!is_null($filters->is_active), fn($q) => $q->where('is_active', $filters->is_active))
+            ->when(
+                $filters->search,
+                fn($q) => $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($filters->search) . '%'])
+            )
+            ->when(
+                $filters->category,
+                fn($q) => $q->where('category', $filters->category)
+            )
+            ->when(
+                !is_null($filters->is_active),
+                fn($q) => $q->where('is_active', $filters->is_active)
+            )
             ->orderBy('id', 'desc')
             ->paginate($filters->per_page);
     }

@@ -15,7 +15,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => (float) $this->price,
             'stock' => (int) $this->stock,
-            'category' => $this->category->value, // Expõe apenas a string, não o objeto Enum
+            'category' => $this->category->value, 
             'is_active' => (bool) $this->is_active,
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),

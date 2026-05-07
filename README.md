@@ -19,7 +19,7 @@ O projeto segue uma arquitetura em camadas para garantir testabilidade e facilid
 * **Banco de Dados:** PostgreSQL (Produção/Dev), SQLite (Testes)
 * **Cache & Queue:** Redis
 * **Containerização:** Docker & Docker Compose
-* **Documentação:** Swagger (L5-Swagger)
+* **Documentação:** Scribe
 
 ---
 
@@ -54,7 +54,7 @@ O projeto segue uma arquitetura em camadas para garantir testabilidade e facilid
 
 5.  **Acesse a API:**
     * API: `http://localhost:8000/api/v1/products`
-    * Documentação (Swagger): `http://localhost:8000/api/docs`
+    * Documentação (Scribe): `http://localhost:8000/api/docs`
 
 ---
 

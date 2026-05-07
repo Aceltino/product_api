@@ -45,4 +45,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 'errors' => []
             ], 404);
         });
+
+        $exceptions->render(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e, Request $request) {
+            return response()->json([
+                'success' => false,
+                'message' => 'O recurso solicitado não foi encontrado.',
+                'errors' => []
+            ], 404);
+        });
     })->create();
