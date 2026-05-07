@@ -53,8 +53,8 @@ O projeto segue uma arquitetura em camadas para garantir testabilidade e facilid
     ```
 
 5.  **Acesse a API:**
-    * API: `http://localhost:8000/api/v1/products`
-    * Documentação (Scribe): `http://localhost:8000/api/docs`
+    * API: `http://localhost:8080/api/v1/products`
+    * Documentação (Scribe): `http://localhost:8080/api/docs`
 
 ---
 
