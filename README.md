@@ -78,6 +78,3 @@ Os testes utilizam **SQLite in-memory** para máxima velocidade e isolamento.
 ```bash
 # Rodar todos os testes
 docker compose exec app php artisan test
-
-# Rodar com cobertura (opcional se configurado)
-docker compose exec app php artisan test --coverage
